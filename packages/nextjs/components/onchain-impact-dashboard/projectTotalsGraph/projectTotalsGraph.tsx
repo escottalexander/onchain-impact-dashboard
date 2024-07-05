@@ -101,12 +101,11 @@ export const ProjectTotalsGraph = ({
         </AreaChart>
       </ResponsiveContainer> */}
       <AreaChart
-        className="h-100"
+        className="h-[75%]"
         data={totalsRecord}
         index="date"
         categories={selectedMetrics}
         colors={["indigo", "rose"]}
-        valueFormatter={v => v.toFixed(2)}
         yAxisWidth={60}
         stack={true}
         showAnimation={true}
