@@ -24,3 +24,44 @@ export interface RF4ImpactMetricsByProject {
   log_transaction_count: number; // LOGSCALE: Total Transactions: Count of a project’s transactions over the RF4 scope period October 2023 - June 2024, adjusted to a logarithmic scale. Optimism is a Layer 2 roll-up designed to improve the transaction throughput and reduce the fees on Ethereum. Layer 2s are crucial for scaling Ethereum because they help address the network's congestion issues without compromising its security or decentralization. Transaction counts are an important indicator for assessing the adoption and usage of all the new blockspace made available by the Superchain. Projects that have a sustained, high transaction count provide a clear signal of network growth and blockspace demand. This indicator includes successful transactions with a to_address owned by the project, as well as internal transactions that originate from one of the project's contracts and interact with the canonical EntryPoint (EIP 4337) contracts. This indicator is transformed to a logarithmic scale (log10(gas_fees + 1)). Logarithmic scales are useful for metrics that span several orders of magnitude such as gas fees and transactions and have strong compounding effects. On a log scale, a project with an impact metric value of 100 (10^2) is 2X more impactful than one with a value of 10 (10^1), not 10X. Badgeholders are advised to use either a log scale or a normal (linear) scale in their ballots, not both.
   log_trusted_transaction_count: number; // LOGSCALE: Interactions from Trusted Optimism Users: Count of a project’s transactions performed by trusted users over the RF4 scope period October 2023 - June 2024, adjusted to a logarithmic scale. Bots, airdrop farming, and sybil attacks are longstanding problems in crypto. This metric is designed to filter out these types of interactions and focus on the activity of a small subset of trusted users (less than 5% of all active addresses on the Superchain). By tracking interactions specifically from trusted users, we gain a picture of blockspace demand that is less influenced by the effects of bots / farmers / sybils. A "trusted user" represents an address linked to an account the meets a certain threshold of reputation. Currently, there are several teams in the Optimism ecosystem building reputation models in a privacy-preserving way. This metric aggregates reputation data from multiple platforms (Farcaster, Passport, EigenTrust by Karma3Labs), and the Optimist NFT collection. In order to be consider a trusted user, an address must meet at least two of the following requirements as of 2024-05-21: have a Farcaster ID of 20939, have a Passport score of 20 points or higher, have a Karma3Labs EigenTrust GlobalRank in the top 42,000 of Farcaster users, hold an Optimist NFT in their wallet, or qualified for at least two (out of four) Optimism airdrops. This indicator is transformed to a logarithmic scale (log10(gas_fees + 1)). Logarithmic scales are useful for metrics that span several orders of magnitude such as gas fees and transactions and have strong compounding effects. On a log scale, a project with an impact metric value of 100 (10^2) is 2X more impactful than one with a value of 10 (10^1), not 10X. Badgeholders are advised to use either a log scale or a normal (linear) scale in their ballots, not both.
 }
+
+export interface OSOMetricsResponse {
+  oso_metricsV0: OSO_MetricsV0[];
+}
+
+export interface OSO_MetricsV0 {
+  aggregationFunction: string;
+  definitionRef: string;
+  description: string;
+  displayName: string;
+  metricId: string;
+  metricName: string;
+  metricNamespace: string;
+  metricSource: string;
+  rawDefinition: any;
+}
+
+export interface OSOProjectResponse {
+  oso_projectsV1: OsoProjectsV1[];
+}
+
+export interface OsoProjectsV1 {
+  description: string;
+  displayName: string;
+  projectId: string;
+  projectName: string;
+  projectNamespace: string;
+  projectSource: string;
+}
+
+export interface OSOTimeseriesMetricsResponse {
+  oso_timeseriesMetricsByProjectV0: OsoTimeseriesMetricsByProjectV0[];
+}
+
+export interface OsoTimeseriesMetricsByProjectV0 {
+  amount: number;
+  metricId: string;
+  projectId: string;
+  sampleDate: string;
+  unit: any;
+}

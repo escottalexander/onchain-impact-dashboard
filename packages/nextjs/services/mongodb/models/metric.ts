@@ -2,22 +2,8 @@ import mongoose, { HydratedDocument, Model, Schema } from "mongoose";
 
 export const MetricNames = {
   impact_index: 0,
-  gas_fees: 0,
-  transaction_count: 0,
-  trusted_transaction_count: 0,
-  trusted_transaction_share: 0,
-  trusted_users_onboarded: 0,
-  daily_active_addresses: 0,
-  trusted_daily_active_users: 0,
-  monthly_active_addresses: 0,
-  trusted_monthly_active_users: 0,
-  recurring_addresses: 0,
-  trusted_recurring_users: 0,
-  power_user_addresses: 0,
-  openrank_trusted_users_count: 0,
-  log_gas_fees: 0,
-  log_transaction_count: 0,
-  log_trusted_transaction_count: 0,
+  gas_fees_daily: 0,
+  active_addresses_daily: 0,
 };
 
 export type Metrics = typeof MetricNames;
@@ -26,6 +12,7 @@ export interface IMetric {
   label?: string;
   longLabel?: string;
   name: keyof Metrics;
+  metricId?: string;
   description: string;
   activated: boolean;
   order: number;
@@ -42,6 +29,9 @@ const MetricSchema = new Schema<IMetric, IMetricModel>({
     unique: true,
   },
   longLabel: {
+    type: String,
+  },
+  metricId: {
     type: String,
   },
   description: {
